@@ -1,0 +1,14 @@
+image:
+  name: antora/antora:3.1.9
+pages:
+  stage: deploy
+  rules:
+    - if: $CI_PROJECT_PATH == 'fatihbozik/mirket-docs-site' && $CI_COMMIT_BRANCH == 'main'
+  cache:
+    paths:
+      - .cache
+  script:
+    - antora --fetch --cache-dir .cache/antora --redirect-facility gitlab --to-dir public --url $CI_PAGES_URL antora-playbook.yml
+  artifacts:
+    paths:
+      - public

@@ -1,0 +1,9 @@
+/build/
+/node_modules/
+/workspace/
+
+# IntelliJ Idea
+.idea/
+
+# MacOS
+.DS_Store

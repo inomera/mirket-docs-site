@@ -1,0 +1,9 @@
+#inomeralogo {
+    height: 45px;
+    max-width: 250px;
+}
+
+#modal-versions .current {
+    background-color: #084FA3;
+    color: #fff;
+}

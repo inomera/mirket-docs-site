@@ -1,0 +1,3 @@
+[build]
+publish = "build/site"
+command = "npx antora --redirect-facility=netlify antora-playbook.yml"

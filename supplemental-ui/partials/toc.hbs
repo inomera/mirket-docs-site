@@ -1,0 +1,41 @@
+<aside class="sidebar">
+  <div class="content">
+    <div
+      class="toc"
+      data-title="{{{detag page.title}}}"
+      data-levels="{{{or page.attributes.toclevels 2}}}"
+    >
+      <div class="toc-menu"></div>
+    </div>
+    <div class="sidebar-links">
+      {{#if (and page.fileUri (not env.CI))}}
+        <a href="{{page.fileUri}}">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+          ><path
+              d="m16 2.012 3 3L16.713 7.3l-3-3zM4 14v3h3l8.299-8.287-3-3zm0 6h16v2H4z"
+            ></path></svg>
+          Edit this Page
+        </a>
+      {{else if (and
+        page.editUrl
+        (or env.FORCE_SHOW_EDIT_PAGE_LINK (not page.origin.private))
+      )}}
+        <a href="{{page.editUrl}}">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+          ><path
+              d="m16 2.012 3 3L16.713 7.3l-3-3zM4 14v3h3l8.299-8.287-3-3zm0 6h16v2H4z"
+            ></path></svg>
+          Edit this Page
+        </a>
+      {{/if}}
+    </div>
+  </div>
+</aside>
