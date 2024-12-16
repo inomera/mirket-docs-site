@@ -1,0 +1,16 @@
+{{#if (and page.latest (ne page.url page.latest.url))}}
+<div class="admonitionblock important latest">
+  <table>
+    <tbody><tr>
+      <td class="icon">
+        <i class="fa icon-important" title="ÖNEMLİ"></i>
+      </td>
+      <td class="content">
+        <div class="paragraph">
+          <p>{{#if page.componentVersion.prerelease}}Bu sürüm hâlâ geliştirilme aşamasında ve henüz kararlı olarak kabul edilmemektedir.{{/if}}{{#else}}Daha yeni bir sürüm mevcut.{{/else}} En son kararlı sürüm için lütfen <a href="{{{relativize ./page.latest.url}}}">{{page.component.title}} {{page.latest.displayVersion}}</a>!</p>
+        </div>
+      </td>
+    </tr></tbody>
+  </table>
+</div>
+{{/if}}
