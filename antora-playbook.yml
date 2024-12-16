@@ -9,6 +9,10 @@ content:
       branches: [v4.8.x]
       start_path: docs
       edit_url: false
+    - url: https://github.com/FatihBozik/mirket-guide.git
+      branches: [ v4.8.x ]
+      start_path: docs
+      edit_url: false
 asciidoc:
   attributes:
     experimental: ''
