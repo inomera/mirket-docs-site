@@ -6,11 +6,11 @@ site:
 content:
   sources:
     - url: https://github.com/FatihBozik/mirket-developer-guide.git
-      branches: [v4.8.x]
+      branches: [v4.8.x, v4.9.x]
       start_path: docs
       edit_url: false
     - url: https://github.com/FatihBozik/mirket-guide.git
-      branches: [ v4.8.x ]
+      branches: [v4.8.x]
       start_path: docs
       edit_url: false
 asciidoc:
