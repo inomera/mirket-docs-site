@@ -24,9 +24,4 @@ ui:
   bundle:
     url: https://github.com/spring-io/antora-ui-spring/releases/download/v0.4.16/ui-bundle.zip
     snapshot: true
-  supplemental_files:
-    - path: ./supplemental-ui
-      contents: |
-        static_files:
-        - .nojekyll
-    - path: .nojekyll
+  supplemental_files: ./supplemental-ui
