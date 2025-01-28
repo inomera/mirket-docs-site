@@ -10,7 +10,7 @@ content:
       start_path: docs
       edit_url: false
     - url: https://github.com/inomera/mirket-guide.git
-      branches: [v4.8.x]
+      branches: [v4.8.x, v4.9.x]
       start_path: docs
       edit_url: false
 asciidoc:
