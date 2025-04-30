@@ -1,0 +1,9 @@
+root_level: 0
+component_versions: '*'
+build:
+  command: bundle exec asciidoctor-pdf
+  keep_aggregate_source: true
+asciidoc:
+  attributes:
+    pdf-theme: ./style/pdf-theme.yml
+    pdf-fontsdir: ./style/fonts
