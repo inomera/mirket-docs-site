@@ -1,0 +1,286 @@
+/*
+ * Site search (Lunr) styling.
+ * Rules are prefixed with "html" so they win over the extension's own
+ * search.css, which search-ui.js injects at the end of <head>.
+ */
+:root {
+  --search-accent: #084fa3;
+  --search-input-bg: #f6f8fa;
+  --search-input-bg-focus: #fff;
+  --search-border: #d8dee4;
+  --search-text: #191e1e;
+  --search-muted: #6a737d;
+  --search-panel-bg: #fff;
+  --search-panel-border: #e1e4e8;
+  --search-hover-bg: #f1f6fd;
+  --search-highlight-bg: rgb(8 79 163 / 12%);
+  --search-highlight-text: #084fa3;
+  --search-shadow: 0 12px 32px rgb(15 30 60 / 14%), 0 2px 6px rgb(15 30 60 / 8%);
+}
+
+html.dark-theme {
+  --search-accent: #4c9bf0;
+  --search-input-bg: #262a2d;
+  --search-input-bg-focus: #1b1f23;
+  --search-border: #3a4046;
+  --search-text: #cecfd1;
+  --search-muted: #8b9096;
+  --search-panel-bg: #22262a;
+  --search-panel-border: #343a40;
+  --search-hover-bg: #2b3138;
+  --search-highlight-bg: rgb(76 155 240 / 18%);
+  --search-highlight-text: #7db8f5;
+  --search-shadow: 0 12px 32px rgb(0 0 0 / 45%);
+}
+
+/* ---------- Search box in the header ---------- */
+
+html .navbar-item.search {
+  position: relative;
+  margin-left: auto;
+  padding: 0 0.75rem;
+  display: flex;
+  align-items: center;
+}
+
+html #search-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 22rem;
+  max-width: 100%;
+}
+
+html #search-field .search-icon {
+  position: absolute;
+  top: 50%;
+  left: 0.75rem;
+  transform: translateY(-50%);
+  z-index: 1;
+  color: var(--search-muted);
+  pointer-events: none;
+  transition: color 0.15s ease;
+}
+
+html #search-input {
+  width: 100%;
+  height: 2.4rem;
+  margin: 0; /* the UI bundle adds an 8px/10px offset that throws off the icons */
+  padding: 0 2.5rem 0 2.25rem;
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--search-text);
+  background: var(--search-input-bg);
+  border: 1px solid var(--search-border);
+  border-radius: 999px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+html #search-input::placeholder {
+  color: var(--search-muted);
+  opacity: 1;
+}
+
+html #search-input:hover {
+  border-color: var(--search-muted);
+}
+
+html #search-input:focus {
+  background: var(--search-input-bg-focus);
+  border-color: var(--search-accent);
+  box-shadow: 0 0 0 3px var(--search-highlight-bg);
+}
+
+html #search-field:focus-within .search-icon {
+  color: var(--search-accent);
+}
+
+html #search-input:disabled {
+  cursor: progress;
+  opacity: 0.7;
+}
+
+html #search-input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 0.9rem;
+  width: 0.9rem;
+  margin-right: -1.5rem;
+  cursor: pointer;
+  background: currentColor;
+  color: var(--search-muted);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 6l12 12M18 6 6 18' stroke='black' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 6l12 12M18 6 6 18' stroke='black' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+html #search-field .search-kbd {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  right: 0.7rem;
+  transform: translateY(-50%);
+  min-width: 1.25rem;
+  padding: 0 0.3rem;
+  font-family: var(--monospace-font-family, monospace);
+  font-size: 0.72rem;
+  line-height: 1.25rem;
+  text-align: center;
+  color: var(--search-muted);
+  background: var(--search-input-bg-focus);
+  border: 1px solid var(--search-border);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+html #search-field:focus-within .search-kbd,
+html #search-field.has-query .search-kbd {
+  display: none;
+}
+
+/* ---------- Results dropdown ---------- */
+
+html .search-result-dropdown-menu {
+  top: calc(100% + 0.25rem);
+  right: 0.75rem;
+  left: auto;
+  margin: 0;
+  min-width: 34rem;
+  max-width: 40rem;
+  border-radius: 12px;
+  box-shadow: var(--search-shadow);
+}
+
+html .search-result-dropdown-menu:empty {
+  display: none;
+}
+
+html .search-result-dataset {
+  padding: 0.5rem;
+  background: var(--search-panel-bg);
+  border: 1px solid var(--search-panel-border);
+  border-radius: 12px;
+  max-height: min(70vh, 36rem);
+  overscroll-behavior: contain;
+}
+
+html .search-result-component-header {
+  position: sticky;
+  top: -0.5rem;
+  z-index: 1;
+  margin: 0 0 0.25rem;
+  padding: 0.6rem 0.75rem 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--search-accent);
+  background: var(--search-panel-bg);
+  border-bottom: 1px solid var(--search-panel-border);
+}
+
+html .search-result-item {
+  margin: 0;
+  border-radius: 8px;
+}
+
+html .search-result-item + .search-result-item {
+  margin-top: 2px;
+}
+
+html .search-result-document-title {
+  width: 30%;
+  padding: 0.65rem 0.75rem 0.65rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--search-text);
+  border-right: 1px solid var(--search-panel-border);
+}
+
+html .search-result-document-hit {
+  font-size: 0.8rem;
+  color: var(--search-muted);
+}
+
+html .search-result-document-hit > a {
+  padding: 0.55rem 0.75rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.1s ease;
+}
+
+html .search-result-document-hit > a:hover,
+html .search-result-document-hit > a:focus-visible {
+  background: var(--search-hover-bg);
+  outline: none;
+}
+
+html .search-result-document-hit .search-result-section-title {
+  color: var(--search-text);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+html .search-result-document-hit .search-result-highlight {
+  color: var(--search-highlight-text);
+  background: var(--search-highlight-bg);
+  border-radius: 3px;
+  padding: 0 0.15em;
+  font-weight: 600;
+}
+
+/* ---------- Small screens ---------- */
+
+@media screen and (max-width: 1023px) {
+  html #search-field {
+    width: 16rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /* keep the logo, drop the title text so the search box has room */
+  html .navbar-brand > a.navbar-item:first-child {
+    font-size: 0;
+    flex: none;
+  }
+
+  html .navbar-brand > a.navbar-item:first-child img {
+    margin-right: 0 !important;
+  }
+
+  html .navbar-item.search {
+    padding: 0 0.5rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  html #search-field {
+    width: 100%;
+  }
+
+  html #search-field .search-kbd {
+    display: none;
+  }
+
+  html .search-result-dropdown-menu {
+    position: fixed;
+    top: var(--navbar-height, 4.6rem);
+    left: 0.5rem;
+    right: 0.5rem;
+    min-width: 0;
+    max-width: none;
+  }
+
+  html .search-result-item {
+    flex-direction: column;
+  }
+
+  html .search-result-document-title {
+    width: auto;
+    text-align: left;
+    border-right: none;
+    padding-bottom: 0;
+  }
+}

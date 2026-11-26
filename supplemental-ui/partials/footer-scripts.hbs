@@ -1,0 +1,45 @@
+<script src="{{{uiRootPath}}}/js/vendor/import.js"></script>
+<script src="{{{uiRootPath}}}/js/site.js"></script>
+<script async src="{{{uiRootPath}}}/js/vendor/highlight.js"></script>
+<script async src="{{{uiRootPath}}}/js/vendor/{{#if (asciidocExtensionRegistered '@asciidoctor/tabs')}}asciidoctor{{else}}spring{{/if}}-tabs.js" data-sync-storage-key="docs:preferred-tab"></script>
+{{> search}}
+{{#if env.SITE_SEARCH_PROVIDER}}
+{{> search-scripts}}
+<script>
+  !function () {
+    var input = document.getElementById('search-input')
+    if (!input) return
+    var field = document.getElementById('search-field')
+
+    // search-ui.js only searches on keydown (debounced); also search on paste, autofill
+    // and when the "x" clears the box. Extra triggers are collapsed by its debounce.
+    input.addEventListener('input', function () {
+      if (field) field.classList.toggle('has-query', !!input.value)
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Unidentified' }))
+    })
+
+    // Focus the docs search with "/" or Ctrl/Cmd+K
+    document.addEventListener('keydown', function (e) {
+      if (e.target === input) return
+      var tag = (e.target.tagName || '').toLowerCase()
+      if (tag === 'input' || tag === 'textarea' || tag === 'select' || e.target.isContentEditable) return
+      if (e.key === '/' || ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k')) {
+        e.preventDefault()
+        input.focus()
+        input.select()
+      }
+    })
+
+    // Localize the "no results" message
+    var results = document.querySelector('.search-result-dropdown-menu')
+    if (results && 'MutationObserver' in window) {
+      new MutationObserver(function () {
+        var msg = results.querySelector('.search-result-document-hit > strong')
+        if (msg && /^No results found/.test(msg.textContent)) {
+          msg.textContent = '"' + input.value + '" için sonuç bulunamadı'
+        }
+      }).observe(results, { childList: true, subtree: true })
+    }
+  }()
+</script>
+{{/if}}
