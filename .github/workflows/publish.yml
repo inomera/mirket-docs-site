@@ -25,8 +25,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - name: Install Antora
-        run: npm i antora
+      - name: Install Antora and extensions
+        run: npm ci
       - name: Generate Site
         run: npx antora antora-playbook.yml
       - name: Upload Pages Artifact
